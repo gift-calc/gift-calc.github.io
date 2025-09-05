@@ -183,6 +183,103 @@
             flex: 1;
         }
 
+        .installation-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .os-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem 1.25rem;
+            background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-secondary));
+            border: 1px solid var(--border-primary);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-light);
+        }
+
+        .os-detected {
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .separator {
+            color: var(--text-muted);
+        }
+
+        .toggle-all-btn {
+            background: transparent;
+            border: 1px solid var(--border-secondary);
+            color: var(--text-secondary);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-family: inherit;
+        }
+
+        .toggle-all-btn:hover {
+            background: var(--bg-tertiary);
+            border-color: var(--accent-primary);
+            color: var(--text-primary);
+            transform: translateY(-1px);
+        }
+
+        .toggle-all-btn.showing-all {
+            background: var(--accent-primary);
+            color: white;
+            border-color: var(--accent-primary);
+        }
+
+        .toggle-all-btn.showing-all:hover {
+            background: #2ea043;
+            border-color: #2ea043;
+        }
+
+        .toggle-icon {
+            font-size: 0.9rem;
+        }
+
+        .install-option.os-filtered {
+            display: none;
+        }
+
+        .install-option.recommended {
+            border-color: var(--accent-primary);
+            background: linear-gradient(135deg, var(--bg-secondary), rgba(35, 134, 54, 0.05));
+        }
+
+        .install-option.recommended::before {
+            background: linear-gradient(180deg, var(--accent-primary), #2ea043);
+            width: 5px;
+        }
+
+        .recommended-badge {
+            position: absolute;
+            top: -8px;
+            right: 1rem;
+            background: var(--accent-primary);
+            color: white;
+            padding: 0.25rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: var(--shadow-medium);
+            z-index: 10;
+        }
+
         .terminal {
             background: var(--terminal-bg);
             border: 1px solid var(--border-secondary);
@@ -379,6 +476,16 @@
                 min-width: auto;
             }
             
+            .os-info {
+                flex-direction: column;
+                gap: 0.75rem;
+                text-align: center;
+            }
+            
+            .separator {
+                display: none;
+            }
+            
             .examples-grid {
                 grid-template-columns: 1fr;
             }
@@ -409,8 +516,18 @@
         <section class="section">
             <div class="container">
                 <h2>Installation</h2>
+                <div class="installation-header">
+                    <div class="os-info" id="os-info" style="display: none;">
+                        <span class="os-detected">📱 Detected: <strong id="detected-os"></strong></span>
+                        <span class="separator">•</span>
+                        <button class="toggle-all-btn" id="toggle-all-btn" onclick="toggleAllInstallOptions()">
+                            <span class="toggle-icon">👁️</span>
+                            <span class="toggle-text">Show all options</span>
+                        </button>
+                    </div>
+                </div>
                 <div class="installation-list">
-                    <div class="install-option">
+                    <div class="install-option" data-os="macos,linux" data-method="homebrew">
                         <div class="install-header">
                             <h3>🍺 Homebrew</h3>
                             <p class="platform">macOS & Linux</p>
@@ -428,7 +545,7 @@
                         </div>
                     </div>
 
-                    <div class="install-option">
+                    <div class="install-option" data-os="macos,linux,windows" data-method="npm">
                         <div class="install-header">
                             <h3>📦 NPM</h3>
                             <p class="platform">All platforms</p>
@@ -446,7 +563,7 @@
                         </div>
                     </div>
 
-                    <div class="install-option">
+                    <div class="install-option" data-os="macos,linux" data-method="script">
                         <div class="install-header">
                             <h3>🚀 Install Script</h3>
                             <p class="platform">Unix/Linux/macOS</p>
@@ -464,7 +581,7 @@
                         </div>
                     </div>
 
-                    <div class="install-option">
+                    <div class="install-option" data-os="windows" data-method="powershell">
                         <div class="install-header">
                             <h3>🪟 PowerShell</h3>
                             <p class="platform">Windows</p>
@@ -613,6 +730,116 @@
     </footer>
 
     <script>
+        // OS Detection and Installation Filtering
+        let showingAll = false;
+        let detectedOS = null;
+        
+        function detectOS() {
+            const userAgent = navigator.userAgent.toLowerCase();
+            const platform = navigator.platform.toLowerCase();
+            
+            if (userAgent.includes('win') || platform.includes('win')) {
+                return 'windows';
+            } else if (userAgent.includes('mac') || platform.includes('mac')) {
+                return 'macos';
+            } else if (userAgent.includes('linux') || platform.includes('linux')) {
+                return 'linux';
+            } else {
+                return 'unknown';
+            }
+        }
+        
+        function getOSDisplayName(os) {
+            const names = {
+                'windows': 'Windows',
+                'macos': 'macOS',
+                'linux': 'Linux',
+                'unknown': 'Unknown OS'
+            };
+            return names[os] || 'Unknown OS';
+        }
+        
+        function getRecommendedMethod(os) {
+            const recommendations = {
+                'macos': 'homebrew',
+                'linux': 'script',
+                'windows': 'powershell'
+            };
+            return recommendations[os] || 'npm';
+        }
+        
+        function filterInstallOptions() {
+            const installOptions = document.querySelectorAll('.install-option');
+            const recommendedMethod = getRecommendedMethod(detectedOS);
+            
+            installOptions.forEach(option => {
+                const supportedOS = option.getAttribute('data-os').split(',');
+                const method = option.getAttribute('data-method');
+                
+                if (showingAll) {
+                    option.classList.remove('os-filtered');
+                } else {
+                    if (supportedOS.includes(detectedOS)) {
+                        option.classList.remove('os-filtered');
+                        
+                        // Add recommended badge
+                        if (method === recommendedMethod && !option.querySelector('.recommended-badge')) {
+                            option.classList.add('recommended');
+                            const badge = document.createElement('span');
+                            badge.className = 'recommended-badge';
+                            badge.textContent = 'Recommended';
+                            option.appendChild(badge);
+                        }
+                    } else {
+                        option.classList.add('os-filtered');
+                        option.classList.remove('recommended');
+                        const badge = option.querySelector('.recommended-badge');
+                        if (badge) badge.remove();
+                    }
+                }
+            });
+        }
+        
+        function toggleAllInstallOptions() {
+            showingAll = !showingAll;
+            const toggleBtn = document.getElementById('toggle-all-btn');
+            const toggleText = toggleBtn.querySelector('.toggle-text');
+            const toggleIcon = toggleBtn.querySelector('.toggle-icon');
+            
+            if (showingAll) {
+                toggleBtn.classList.add('showing-all');
+                toggleText.textContent = 'Show recommended';
+                toggleIcon.textContent = '🎯';
+                
+                // Remove all recommended badges when showing all
+                document.querySelectorAll('.recommended-badge').forEach(badge => badge.remove());
+                document.querySelectorAll('.install-option').forEach(option => {
+                    option.classList.remove('recommended');
+                });
+            } else {
+                toggleBtn.classList.remove('showing-all');
+                toggleText.textContent = 'Show all options';
+                toggleIcon.textContent = '👁️';
+            }
+            
+            filterInstallOptions();
+        }
+        
+        function initializeOSDetection() {
+            detectedOS = detectOS();
+            
+            if (detectedOS !== 'unknown') {
+                const osInfo = document.getElementById('os-info');
+                const detectedOSSpan = document.getElementById('detected-os');
+                
+                detectedOSSpan.textContent = getOSDisplayName(detectedOS);
+                osInfo.style.display = 'flex';
+                
+                // Apply initial filtering
+                filterInstallOptions();
+            }
+        }
+
         function copyToClipboard(elementId) {
             const element = document.getElementById(elementId);
             const commands = element.querySelectorAll('.terminal-command');
@@ -666,6 +893,9 @@
                 }
             });
         });
+        
+        // Initialize OS detection when page loads
+        document.addEventListener('DOMContentLoaded', initializeOSDetection);
     </script>
 </body>
 </html>
