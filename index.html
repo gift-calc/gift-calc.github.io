@@ -6,6 +6,7 @@
     <title>Gift Calculator - Smart CLI tool for gift amount calculations</title>
     <meta name="description" content="A smart CLI tool that calculates gift amounts with configurable randomness and relationship-based bias. Available for macOS, Linux, and Windows.">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🎁%3C/text%3E%3C/svg%3E">
+    <link rel="stylesheet" href="css/terminal-demo.css">
     <style>
         :root {
             --bg-primary: #0d1117;
@@ -669,6 +670,30 @@
             </div>
         </section>
 
+        <section class="demo-section">
+            <div class="container">
+                <div class="demo-header">
+                    <h2>🚀 Interactive Demo</h2>
+                    <p class="demo-subtitle">Try gift-calc right in your browser! No installation required.</p>
+                    <p class="demo-subtitle">Type commands directly in the terminal below - it works just like the real CLI.</p>
+                </div>
+                
+                <div class="demo-terminal-wrapper">
+                    <div class="terminal-container">
+                        <div class="terminal-header">
+                            <div class="terminal-dots">
+                                <div class="terminal-dot red"></div>
+                                <div class="terminal-dot yellow"></div>
+                                <div class="terminal-dot green"></div>
+                            </div>
+                            <div class="terminal-title">gift-calc interactive terminal</div>
+                        </div>
+                        <div class="terminal" id="gift-calc-terminal"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section class="section">
             <div class="container">
                 <h2>Features</h2>
@@ -897,5 +922,9 @@
         // Initialize OS detection when page loads
         document.addEventListener('DOMContentLoaded', initializeOSDetection);
     </script>
+    
+    <!-- Interactive Demo Scripts -->
+    <script src="js/core.js"></script>
+    <script src="js/terminal.js"></script>
 </body>
 </html>
