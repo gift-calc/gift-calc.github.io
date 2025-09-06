@@ -1,0 +1,67 @@
+name: Sync Website from Main Repository
+
+on:
+  repository_dispatch:
+    types: [website_sync]
+
+jobs:
+  sync_website:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          
+      - name: Clone main repository
+        run: |
+          echo "📥 Cloning main repository..."
+          git clone --depth 1 https://github.com/gift-calc/gift-calc.git main-repo
+          
+      - name: Sync core files
+        run: |
+          echo "🔄 Syncing core files..."
+          VERSION="${{ github.event.client_payload.version }}"
+          echo "📦 Version: $VERSION"
+          
+          # Create js directory if it doesn't exist
+          mkdir -p js
+          
+          # Copy core web file
+          if [ -f main-repo/src/core-web.js ]; then
+            cp main-repo/src/core-web.js js/core.js
+            echo "✅ Copied core-web.js to js/core.js"
+          else
+            echo "⚠️ core-web.js not found, skipping"
+          fi
+          
+          # Process and copy terminal file
+          if [ -f main-repo/src/terminal-web.js ]; then
+            sed "s/{{VERSION}}/$VERSION/g" main-repo/src/terminal-web.js > js/terminal.js
+            echo "✅ Processed terminal-web.js to js/terminal.js"
+            echo "🔄 Version $VERSION injected"
+          else
+            echo "⚠️ terminal-web.js not found, skipping"
+          fi
+          
+      - name: Commit and push changes
+        run: |
+          echo "📝 Checking for changes..."
+          
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          if ! git diff --quiet js/; then
+            git add js/
+            git commit -m "chore: sync core logic and terminal from main repository (v${{ github.event.client_payload.version }})"
+            git push origin main
+            echo "✅ Website updated successfully"
+          else
+            echo "ℹ️ No changes detected"
+          fi

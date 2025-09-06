@@ -194,7 +194,7 @@ class GiftCalcTerminal {
       }
       
       if (config.command === 'version') {
-        this.addOutput('gift-calc version 1.2.1', 'info');
+        this.addOutput('gift-calc version 1.0.0', 'info');
         return;
       }
       
