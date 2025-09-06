@@ -1,5 +1,6 @@
-// Gift Calculator Terminal Emulator
+// Gift Calculator Terminal Emulator - Template Version
 // Interactive terminal demo for the gift-calc CLI tool
+// VERSION: 1.3.2 - This placeholder will be replaced by GitHub Actions
 
 class GiftCalcTerminal {
   constructor(containerId, options = {}) {
@@ -194,7 +195,7 @@ class GiftCalcTerminal {
       }
       
       if (config.command === 'version') {
-        this.addOutput('gift-calc version 1.0.0', 'info');
+        this.addOutput('gift-calc version 1.3.2', 'info');
         return;
       }
       
@@ -374,6 +375,7 @@ Examples:
   gift-calc
   gift-calc -b 100 -f 8 --name "Alice"
   gcalc -c USD -v 30 -n 9
+  gift-calc -b 50 --dickhead
   gift-calc --help
 
 Use Tab for command completion, ↑/↓ for history.
