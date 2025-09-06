@@ -22,14 +22,14 @@ class GiftCalcTerminal {
         flags: ['-b', '--basevalue', '-v', '--variation', '-f', '--friend-score', 
                '-n', '--nice-score', '-c', '--currency', '-d', '--decimals', 
                '--name', '--max', '--min', '--asshole', '--dickhead', 
-               '--no-log', '-cp', '--copy', '-h', '--help'],
+               '--no-log', '-cp', '--copy', '-h', '--help', '--version'],
         subcommands: ['init-config', 'update-config', 'log']
       },
       'gcalc': {
         flags: ['-b', '--basevalue', '-v', '--variation', '-f', '--friend-score', 
                '-n', '--nice-score', '-c', '--currency', '-d', '--decimals', 
                '--name', '--max', '--min', '--asshole', '--dickhead', 
-               '--no-log', '-cp', '--copy', '-h', '--help'],
+               '--no-log', '-cp', '--copy', '-h', '--help', '--version'],
         subcommands: ['init-config', 'update-config', 'log']
       },
       'help': {},
@@ -190,6 +190,11 @@ class GiftCalcTerminal {
       
       if (config.showHelp) {
         this.addOutput(window.GiftCalc.getHelpText(), 'help');
+        return;
+      }
+      
+      if (config.command === 'version') {
+        this.addOutput('gift-calc version 1.2.1', 'info');
         return;
       }
       
@@ -358,6 +363,7 @@ Common options:
   --max                     Use maximum amount
   --min                     Use minimum amount
   -h, --help               Show detailed help
+  --version                Show version information
 
 Terminal commands:
   help                      Show this help
