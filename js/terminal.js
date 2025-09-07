@@ -1,6 +1,6 @@
 // Gift Calculator Terminal Emulator - Template Version
 // Interactive terminal demo for the gift-calc CLI tool
-// VERSION: 2.2.1 - This placeholder will be replaced by GitHub Actions
+// VERSION: 2.2.2 - This placeholder will be replaced by GitHub Actions
 
 class GiftCalcTerminal {
   constructor(containerId, options = {}) {
@@ -195,7 +195,7 @@ class GiftCalcTerminal {
       }
       
       if (config.command === 'version') {
-        this.addOutput('gift-calc version 2.2.1', 'info');
+        this.addOutput('gift-calc version 2.2.2', 'info');
         return;
       }
       
