@@ -1,6 +1,6 @@
 // Gift Calculator Terminal Emulator - Template Version
 // Interactive terminal demo for the gift-calc CLI tool
-// VERSION: 1.4.0 - This placeholder will be replaced by GitHub Actions
+// VERSION: 2.0.0 - This placeholder will be replaced by GitHub Actions
 
 class GiftCalcTerminal {
   constructor(containerId, options = {}) {
@@ -20,17 +20,17 @@ class GiftCalcTerminal {
     // Available commands and their completions
     this.commands = {
       'gift-calc': {
-        flags: ['-b', '--basevalue', '-r', '--variation', '-f', '--friend-score', 
+        flags: ['-b', '--basevalue', '-v', '--variation', '-f', '--friend-score', 
                '-n', '--nice-score', '-c', '--currency', '-d', '--decimals', 
                '--name', '--max', '--min', '--asshole', '--dickhead', 
-               '--no-log', '-C', '--copy', '-h', '--help', '-v', '-V', '--version'],
+               '--no-log', '-cp', '--copy', '-h', '--help', '--version'],
         subcommands: ['init-config', 'update-config', 'log']
       },
       'gcalc': {
-        flags: ['-b', '--basevalue', '-r', '--variation', '-f', '--friend-score', 
+        flags: ['-b', '--basevalue', '-v', '--variation', '-f', '--friend-score', 
                '-n', '--nice-score', '-c', '--currency', '-d', '--decimals', 
                '--name', '--max', '--min', '--asshole', '--dickhead', 
-               '--no-log', '-C', '--copy', '-h', '--help', '-v', '-V', '--version'],
+               '--no-log', '-cp', '--copy', '-h', '--help', '--version'],
         subcommands: ['init-config', 'update-config', 'log']
       },
       'help': {},
@@ -195,7 +195,7 @@ class GiftCalcTerminal {
       }
       
       if (config.command === 'version') {
-        this.addOutput('gift-calc version 1.4.0', 'info');
+        this.addOutput('gift-calc version 2.0.0', 'info');
         return;
       }
       
@@ -356,7 +356,7 @@ gcalc [options]            Short alias for gift-calc
 
 Common options:
   -b, --basevalue <num>     Set base value (default: 70)
-  -r, --variation <percent> Set variation 0-100 (default: 20)  
+  -v, --variation <percent> Set variation 0-100 (default: 20)  
   -f, --friend-score <1-10> Friend score (default: 5)
   -n, --nice-score <0-10>   Nice score (default: 5)
   -c, --currency <code>     Currency code (default: SEK)
@@ -364,7 +364,7 @@ Common options:
   --max                     Use maximum amount
   --min                     Use minimum amount
   -h, --help               Show detailed help
-  -v, -V, --version        Show version information
+  --version                Show version information
 
 Terminal commands:
   help                      Show this help
@@ -374,7 +374,7 @@ Terminal commands:
 Examples:
   gift-calc
   gift-calc -b 100 -f 8 --name "Alice"
-  gcalc -c USD -r 30 -n 9
+  gcalc -c USD -v 30 -n 9
   gift-calc -b 50 --dickhead
   gift-calc --help
 
