@@ -352,7 +352,7 @@ class GiftCalcControls {
     }
     
     if (this.state.variation !== 20) {
-      command += ` -v ${this.state.variation}`;
+      command += ` -r ${this.state.variation}`;
     }
     
     if (this.state.friendScore !== 5) {
