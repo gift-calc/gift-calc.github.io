@@ -251,6 +251,61 @@
             font-size: 0.9rem;
         }
 
+        .docker-protips {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: linear-gradient(135deg, rgba(35, 134, 54, 0.05), rgba(47, 129, 247, 0.05));
+            border: 1px solid var(--border-secondary);
+            border-radius: 6px;
+            font-size: 0.85rem;
+        }
+
+        .docker-protips h4 {
+            color: var(--accent-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .docker-protips .protip-item {
+            margin-bottom: 0.75rem;
+            padding-left: 1rem;
+            position: relative;
+        }
+
+        .docker-protips .protip-item:before {
+            content: "💡";
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .docker-protips .protip-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .docker-protips .alias-code {
+            background: var(--terminal-bg);
+            padding: 0.5rem;
+            border-radius: 4px;
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+            font-size: 0.8rem;
+            color: var(--terminal-text);
+            margin: 0.5rem 0;
+            border: 1px solid var(--border-secondary);
+            display: block;
+            overflow-x: auto;
+        }
+
+        .docker-protips .shell-specific {
+            color: var(--text-secondary);
+            font-style: italic;
+            font-size: 0.8rem;
+            margin-top: 0.25rem;
+        }
+
         .install-option.os-filtered {
             display: none;
         }
@@ -611,6 +666,27 @@
                         </div>
                     </div>
 
+                    <div class="install-option" data-os="macos,linux,windows" data-method="docker">
+                        <div class="install-header">
+                            <h3>🐳 Docker</h3>
+                            <p class="platform">All platforms</p>
+                        </div>
+                        <div class="install-terminal">
+                            <div class="terminal">
+                                <button class="copy-button" onclick="copyToClipboard('docker-install')">Copy</button>
+                                <div class="terminal-content" id="docker-install">
+                                    <div class="terminal-line">
+                                        <span class="terminal-prompt">$</span>
+                                        <span class="terminal-command">docker run --rm gift-calc/gift-calc --help</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="docker-protips" id="docker-protips">
+                                <!-- Pro-tips will be inserted here based on detected OS -->
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="install-option" data-os="windows" data-method="powershell">
                         <div class="install-header">
                             <h3>🪟 PowerShell</h3>
@@ -818,6 +894,100 @@
             filterInstallOptions();
         }
         
+        function getDockerProTips(os) {
+            const tips = {
+                'windows': {
+                    title: '🪟 Windows Pro-Tips',
+                    items: [
+                        {
+                            text: 'Create a PowerShell alias for easy access:',
+                            code: `function gift-calc { docker run --rm gift-calc/gift-calc $args }
+function gcalc { docker run --rm gift-calc/gift-calc $args }`,
+                            shell: 'Add to your PowerShell profile ($PROFILE)'
+                        },
+                        {
+                            text: 'Or create a batch file in a directory in your PATH:',
+                            code: `@echo off
+docker run --rm gift-calc/gift-calc %*`,
+                            shell: 'Save as gift-calc.bat and gcalc.bat'
+                        }
+                    ]
+                },
+                'macos': {
+                    title: '🍎 macOS Pro-Tips',
+                    items: [
+                        {
+                            text: 'Add shell aliases to your ~/.zshrc or ~/.bash_profile:',
+                            code: `alias gift-calc='docker run --rm gift-calc/gift-calc'
+alias gcalc='docker run --rm gift-calc/gift-calc'`,
+                            shell: 'Restart terminal or run: source ~/.zshrc'
+                        },
+                        {
+                            text: 'For a more advanced setup with volume mounting:',
+                            code: `alias gift-calc='docker run --rm -v ~/.config/gift-calc:/root/.config/gift-calc gift-calc/gift-calc'
+alias gcalc='docker run --rm -v ~/.config/gift-calc:/root/.config/gift-calc gift-calc/gift-calc'`,
+                            shell: 'Persists config across Docker runs'
+                        }
+                    ]
+                },
+                'linux': {
+                    title: '🐧 Linux Pro-Tips',
+                    items: [
+                        {
+                            text: 'Add shell aliases to your ~/.bashrc or ~/.zshrc:',
+                            code: `alias gift-calc='docker run --rm gift-calc/gift-calc'
+alias gcalc='docker run --rm gift-calc/gift-calc'`,
+                            shell: 'Restart terminal or run: source ~/.bashrc'
+                        },
+                        {
+                            text: 'For persistent config, mount your config directory:',
+                            code: `alias gift-calc='docker run --rm -v ~/.config/gift-calc:/root/.config/gift-calc gift-calc/gift-calc'
+alias gcalc='docker run --rm -v ~/.config/gift-calc:/root/.config/gift-calc gift-calc/gift-calc'`,
+                            shell: 'Keeps your settings between runs'
+                        }
+                    ]
+                },
+                'unknown': {
+                    title: '🚀 Pro-Tips',
+                    items: [
+                        {
+                            text: 'Create shell aliases for easier access:',
+                            code: `# Bash/Zsh
+alias gift-calc='docker run --rm gift-calc/gift-calc'
+alias gcalc='docker run --rm gift-calc/gift-calc'
+
+# PowerShell
+function gift-calc { docker run --rm gift-calc/gift-calc $args }
+function gcalc { docker run --rm gift-calc/gift-calc $args }`,
+                            shell: 'Add to your shell profile'
+                        }
+                    ]
+                }
+            };
+            return tips[os] || tips['unknown'];
+        }
+
+        function updateDockerProTips() {
+            const dockerProtips = document.getElementById('docker-protips');
+            if (!dockerProtips) return;
+            
+            const tips = getDockerProTips(detectedOS || 'unknown');
+            
+            let html = `<h4><span>🎯</span>${tips.title}</h4>`;
+            
+            tips.items.forEach(tip => {
+                html += `
+                    <div class="protip-item">
+                        ${tip.text}
+                        <code class="alias-code">${tip.code}</code>
+                        <div class="shell-specific">${tip.shell}</div>
+                    </div>
+                `;
+            });
+            
+            dockerProtips.innerHTML = html;
+        }
+
         function initializeOSDetection() {
             detectedOS = detectOS();
             
@@ -831,6 +1001,9 @@
                 // Apply initial filtering
                 filterInstallOptions();
             }
+            
+            // Update Docker pro-tips regardless of OS detection
+            updateDockerProTips();
         }
 
         function copyToClipboard(elementId) {
