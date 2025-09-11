@@ -548,6 +548,518 @@
                 text-align: center !important;
             }
         }
+
+        /* MCP Section Styles */
+        .mcp-section {
+            position: relative;
+        }
+
+        /* MCP Benefits */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .benefit-item {
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .benefit-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .benefit-item h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .benefit-item p {
+            color: var(--text-secondary);
+        }
+
+        /* Client Setup */
+        .mcp-setup {
+            margin: 4rem 0;
+        }
+
+        .mcp-setup h3 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .client-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .client-btn {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: 8px;
+            padding: 1rem 0.75rem;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            font-family: inherit;
+            font-size: 0.9rem;
+        }
+
+        .client-btn:hover {
+            background: var(--bg-tertiary);
+            border-color: var(--accent-primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .client-btn.active {
+            background: linear-gradient(135deg, var(--accent-primary), #2ea043);
+            border-color: var(--accent-primary);
+            color: white;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .client-btn.active:hover {
+            background: linear-gradient(135deg, #2ea043, var(--accent-primary));
+        }
+
+        .client-icon {
+            font-size: 1.5rem;
+        }
+
+        .client-name {
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .client-badge {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            background: var(--accent-warning);
+            color: white;
+            padding: 0.15rem 0.4rem;
+            border-radius: 8px;
+            font-size: 0.6rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: var(--shadow-light);
+        }
+
+        /* Setup Instructions */
+        .setup-instructions {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: 12px;
+            padding: 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .instruction-panel {
+            display: none;
+            padding: 2rem;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .instruction-panel.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .instruction-panel h4 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-secondary);
+            text-align: center;
+        }
+
+        .setup-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .setup-step {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            flex-shrink: 0;
+            width: 2.5rem;
+            height: 2.5rem;
+            background: linear-gradient(135deg, var(--accent-primary), #2ea043);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: var(--shadow-light);
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-content h5 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .step-content p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .step-content ul {
+            color: var(--text-secondary);
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .step-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .config-paths {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-secondary);
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .path-item {
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .path-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .path-item code {
+            background: var(--terminal-bg);
+            color: var(--terminal-text);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+            border: 1px solid var(--border-secondary);
+            margin-left: 0.5rem;
+        }
+
+        .config-code {
+            background: var(--terminal-bg) !important;
+            color: var(--terminal-text) !important;
+            padding: 1rem !important;
+            border-radius: 6px !important;
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace !important;
+            font-size: 0.85rem !important;
+            line-height: 1.4 !important;
+            overflow-x: auto !important;
+            margin: 0 !important;
+            white-space: pre-wrap !important;
+            border: 1px solid var(--border-secondary) !important;
+        }
+
+        /* MCP Tools */
+        .mcp-tools {
+            margin: 4rem 0;
+        }
+
+        .mcp-tools h3 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .tool-category {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .category-title {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .category-title.safe {
+            color: var(--accent-primary);
+        }
+
+        .category-title.destructive {
+            color: var(--accent-warning);
+        }
+
+        .safety-badge {
+            padding: 0.25rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-left: auto;
+        }
+
+        .safety-badge.safe {
+            background: rgba(35, 134, 54, 0.2);
+            color: var(--accent-primary);
+            border: 1px solid rgba(35, 134, 54, 0.3);
+        }
+
+        .safety-badge.destructive {
+            background: rgba(248, 81, 73, 0.2);
+            color: var(--accent-warning);
+            border: 1px solid rgba(248, 81, 73, 0.3);
+        }
+
+        .tool-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .tool-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-secondary);
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .tool-item:hover {
+            background: var(--bg-primary);
+            border-color: var(--accent-primary);
+            transform: translateX(4px);
+        }
+
+        .tool-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            margin-top: 0.2rem;
+        }
+
+        .tool-info h5 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+            color: var(--text-primary);
+        }
+
+        .tool-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        /* MCP Examples */
+        .mcp-examples {
+            margin: 4rem 0;
+        }
+
+        .mcp-examples h3 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+        }
+
+        .examples-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .example-conversation {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .conversation-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .conversation-item.user {
+            align-items: flex-end;
+        }
+
+        .conversation-item.ai {
+            align-items: flex-start;
+        }
+
+        .conversation-item .speaker {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.8;
+        }
+
+        .conversation-item.user .speaker {
+            color: var(--accent-secondary);
+        }
+
+        .conversation-item.ai .speaker {
+            color: var(--accent-primary);
+        }
+
+        .conversation-item p {
+            background: var(--bg-tertiary);
+            padding: 1rem 1.25rem;
+            border-radius: 18px;
+            margin: 0;
+            max-width: 80%;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .conversation-item.user p {
+            background: var(--accent-secondary);
+            color: white;
+            border-bottom-right-radius: 6px;
+        }
+
+        .conversation-item.ai p {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-primary);
+            color: var(--text-primary);
+            border-bottom-left-radius: 6px;
+        }
+
+        .conversation-item strong {
+            color: var(--accent-primary);
+            font-weight: 700;
+        }
+
+        .conversation-item.user strong {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Copy button for instruction code */
+        .instruction-panel .copy-button {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-primary);
+            color: var(--text-secondary);
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            z-index: 10;
+        }
+
+        .instruction-panel .copy-button:hover {
+            background: var(--accent-primary);
+            color: white;
+            border-color: var(--accent-primary);
+        }
+
+        /* Mobile Responsiveness for MCP Section */
+        @media (max-width: 768px) {
+            .client-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.75rem;
+            }
+            
+            .client-btn {
+                padding: 0.75rem 0.5rem;
+                font-size: 0.8rem;
+            }
+            
+            .client-name {
+                font-size: 0.8rem;
+            }
+            
+            .setup-step {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .step-number {
+                align-self: flex-start;
+            }
+            
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .conversation-item p {
+                max-width: 95%;
+            }
+            
+            .examples-container {
+                padding: 0 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .client-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -739,6 +1251,513 @@
                         <span class="feature-icon">💰</span>
                         <h3>Multiple Currencies</h3>
                         <p>Support for any currency with customizable decimal places</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section mcp-section">
+            <div class="container">
+                <h2>🔌 AI Assistant Integration</h2>
+                <div style="text-align: center; margin-bottom: 3rem;">
+                    <p class="subtitle">Connect gift-calc directly to AI assistants like Claude, GPT, and more using the Model Context Protocol (MCP). Get intelligent gift calculations through natural conversation.</p>
+                </div>
+
+                <!-- MCP Benefits -->
+                <div class="mcp-benefits">
+                    <div class="benefits-grid">
+                        <div class="benefit-item">
+                            <span class="benefit-icon">⚡</span>
+                            <h3>Seamless Integration</h3>
+                            <p>Use gift-calc directly within AI conversations</p>
+                        </div>
+                        <div class="benefit-item">
+                            <span class="benefit-icon">🔄</span>
+                            <h3>Real-time Interaction</h3>
+                            <p>AI assistants access your live config and data</p>
+                        </div>
+                        <div class="benefit-item">
+                            <span class="benefit-icon">🌍</span>
+                            <h3>Universal Protocol</h3>
+                            <p>Works with any MCP-compatible AI client</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Client Setup Guide -->
+                <div class="mcp-setup">
+                    <h3>Client Setup</h3>
+                    <p style="text-align: center; margin-bottom: 2rem; color: var(--text-secondary);">Choose your AI client to see setup instructions</p>
+                    
+                    <div class="client-grid">
+                        <button class="client-btn active" data-client="claude-desktop">
+                            <span class="client-icon">🎯</span>
+                            <span class="client-name">Claude Desktop</span>
+                            <span class="client-badge">Recommended</span>
+                        </button>
+                        <button class="client-btn" data-client="claude-code">
+                            <span class="client-icon">💻</span>
+                            <span class="client-name">Claude Code</span>
+                        </button>
+                        <button class="client-btn" data-client="vscode">
+                            <span class="client-icon">🔷</span>
+                            <span class="client-name">VS Code</span>
+                        </button>
+                        <button class="client-btn" data-client="cursor">
+                            <span class="client-icon">🔮</span>
+                            <span class="client-name">Cursor IDE</span>
+                        </button>
+                        <button class="client-btn" data-client="zed">
+                            <span class="client-icon">⚡</span>
+                            <span class="client-name">Zed Editor</span>
+                        </button>
+                        <button class="client-btn" data-client="continue">
+                            <span class="client-icon">🔄</span>
+                            <span class="client-name">Continue</span>
+                        </button>
+                        <button class="client-btn" data-client="lm-studio">
+                            <span class="client-icon">🤖</span>
+                            <span class="client-name">LM Studio</span>
+                        </button>
+                        <button class="client-btn" data-client="other">
+                            <span class="client-icon">⚙️</span>
+                            <span class="client-name">Other</span>
+                        </button>
+                    </div>
+
+                    <div class="setup-instructions">
+                        <!-- Claude Desktop Instructions (default) -->
+                        <div class="instruction-panel active" id="claude-desktop-instructions">
+                            <h4>Claude Desktop Setup</h4>
+                            <div class="setup-steps">
+                                <div class="setup-step">
+                                    <span class="step-number">1</span>
+                                    <div class="step-content">
+                                        <h5>Install gift-calc</h5>
+                                        <div class="terminal">
+                                            <button class="copy-button" onclick="copyInstructionCode(this)">Copy</button>
+                                            <div class="terminal-content">
+                                                <div class="terminal-line">
+                                                    <span class="terminal-prompt">$</span>
+                                                    <span class="terminal-command">npm install -g gift-calc</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="setup-step">
+                                    <span class="step-number">2</span>
+                                    <div class="step-content">
+                                        <h5>Configure Claude Desktop</h5>
+                                        <p>Add to your Claude Desktop config file:</p>
+                                        <div class="config-paths">
+                                            <div class="path-item">
+                                                <strong>macOS:</strong> <code>~/Library/Application Support/Claude/claude_desktop_config.json</code>
+                                            </div>
+                                            <div class="path-item">
+                                                <strong>Windows:</strong> <code>%APPDATA%\Claude\claude_desktop_config.json</code>
+                                            </div>
+                                        </div>
+                                        <div class="terminal">
+                                            <button class="copy-button" onclick="copyInstructionCode(this)">Copy</button>
+                                            <div class="terminal-content">
+                                                <pre class="config-code">{
+  "mcpServers": {
+    "gift-calc": {
+      "command": "gift-calc-mcp",
+      "args": [],
+      "env": {}
+    }
+  }
+}</pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="setup-step">
+                                    <span class="step-number">3</span>
+                                    <div class="step-content">
+                                        <h5>Restart & Test</h5>
+                                        <p>Restart Claude Desktop and look for the MCP connection indicator (🔌). Test with: <em>"Calculate a gift amount for Alice"</em></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Claude Code Instructions -->
+                        <div class="instruction-panel" id="claude-code-instructions">
+                            <h4>Claude Code Setup</h4>
+                            <div class="setup-steps">
+                                <div class="setup-step">
+                                    <span class="step-number">1</span>
+                                    <div class="step-content">
+                                        <h5>Install gift-calc</h5>
+                                        <div class="terminal">
+                                            <button class="copy-button" onclick="copyInstructionCode(this)">Copy</button>
+                                            <div class="terminal-content">
+                                                <div class="terminal-line">
+                                                    <span class="terminal-prompt">$</span>
+                                                    <span class="terminal-command">npm install -g gift-calc</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="setup-step">
+                                    <span class="step-number">2</span>
+                                    <div class="step-content">
+                                        <h5>Add MCP Server</h5>
+                                        <div class="terminal">
+                                            <button class="copy-button" onclick="copyInstructionCode(this)">Copy</button>
+                                            <div class="terminal-content">
+                                                <div class="terminal-line">
+                                                    <span class="terminal-prompt">$</span>
+                                                    <span class="terminal-command">claude mcp add gift-calc gift-calc-mcp</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="setup-step">
+                                    <span class="step-number">3</span>
+                                    <div class="step-content">
+                                        <h5>Verify Installation</h5>
+                                        <div class="terminal">
+                                            <button class="copy-button" onclick="copyInstructionCode(this)">Copy</button>
+                                            <div class="terminal-content">
+                                                <div class="terminal-line">
+                                                    <span class="terminal-prompt">$</span>
+                                                    <span class="terminal-command">claude mcp list</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- VS Code Instructions -->
+                        <div class="instruction-panel" id="vscode-instructions">
+                            <h4>VS Code Setup</h4>
+                            <div class="setup-steps">
+                                <div class="setup-step">
+                                    <span class="step-number">1</span>
+                                    <div class="step-content">
+                                        <h5>Install gift-calc</h5>
+                                        <div class="terminal">
+                                            <button class="copy-button" onclick="copyInstructionCode(this)">Copy</button>
+                                            <div class="terminal-content">
+                                                <div class="terminal-line">
+                                                    <span class="terminal-prompt">$</span>
+                                                    <span class="terminal-command">npm install -g gift-calc</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="setup-step">
+                                    <span class="step-number">2</span>
+                                    <div class="step-content">
+                                        <h5>Create Workspace Configuration</h5>
+                                        <p>Create <code>.vscode/mcp.json</code> in your workspace:</p>
+                                        <div class="terminal">
+                                            <button class="copy-button" onclick="copyInstructionCode(this)">Copy</button>
+                                            <div class="terminal-content">
+                                                <pre class="config-code">{
+  "servers": {
+    "gift-calc": {
+      "type": "stdio",
+      "command": "gift-calc-mcp"
+    }
+  }
+}</pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Other client instructions would follow similar pattern -->
+                        <div class="instruction-panel" id="cursor-instructions">
+                            <h4>Cursor IDE Setup</h4>
+                            <div class="setup-steps">
+                                <div class="setup-step">
+                                    <span class="step-number">1</span>
+                                    <div class="step-content">
+                                        <h5>Install gift-calc & Configure</h5>
+                                        <div class="terminal">
+                                            <button class="copy-button" onclick="copyInstructionCode(this)">Copy</button>
+                                            <div class="terminal-content">
+                                                <div class="terminal-line">
+                                                    <span class="terminal-prompt">$</span>
+                                                    <span class="terminal-command">npm install -g gift-calc</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p>Add to Cursor Composer configuration:</p>
+                                        <div class="terminal">
+                                            <button class="copy-button" onclick="copyInstructionCode(this)">Copy</button>
+                                            <div class="terminal-content">
+                                                <pre class="config-code">{
+  "mcp": {
+    "servers": {
+      "gift-calc": {
+        "command": "gift-calc-mcp"
+      }
+    }
+  }
+}</pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="instruction-panel" id="zed-instructions">
+                            <h4>Zed Editor Setup</h4>
+                            <div class="setup-steps">
+                                <div class="setup-step">
+                                    <span class="step-number">1</span>
+                                    <div class="step-content">
+                                        <h5>Install & Configure Zed</h5>
+                                        <div class="terminal">
+                                            <button class="copy-button" onclick="copyInstructionCode(this)">Copy</button>
+                                            <div class="terminal-content">
+                                                <div class="terminal-line">
+                                                    <span class="terminal-prompt">$</span>
+                                                    <span class="terminal-command">npm install -g gift-calc</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p>Add to Zed <code>settings.json</code>:</p>
+                                        <div class="terminal">
+                                            <button class="copy-button" onclick="copyInstructionCode(this)">Copy</button>
+                                            <div class="terminal-content">
+                                                <pre class="config-code">{
+  "context_servers": {
+    "gift-calc": {
+      "source": "custom",
+      "command": "gift-calc-mcp",
+      "args": [],
+      "env": {}
+    }
+  }
+}</pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="instruction-panel" id="continue-instructions">
+                            <h4>Continue (VS Code/JetBrains) Setup</h4>
+                            <div class="setup-steps">
+                                <div class="setup-step">
+                                    <span class="step-number">1</span>
+                                    <div class="step-content">
+                                        <h5>Install & Configure Continue</h5>
+                                        <div class="terminal">
+                                            <button class="copy-button" onclick="copyInstructionCode(this)">Copy</button>
+                                            <div class="terminal-content">
+                                                <div class="terminal-line">
+                                                    <span class="terminal-prompt">$</span>
+                                                    <span class="terminal-command">npm install -g gift-calc</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p>Add to Continue's MCP configuration:</p>
+                                        <div class="terminal">
+                                            <button class="copy-button" onclick="copyInstructionCode(this)">Copy</button>
+                                            <div class="terminal-content">
+                                                <pre class="config-code">{
+  "mcpServers": {
+    "gift-calc": {
+      "command": "gift-calc-mcp"
+    }
+  }
+}</pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="instruction-panel" id="lm-studio-instructions">
+                            <h4>LM Studio Setup</h4>
+                            <div class="setup-steps">
+                                <div class="setup-step">
+                                    <span class="step-number">1</span>
+                                    <div class="step-content">
+                                        <h5>Install & Configure LM Studio</h5>
+                                        <div class="terminal">
+                                            <button class="copy-button" onclick="copyInstructionCode(this)">Copy</button>
+                                            <div class="terminal-content">
+                                                <div class="terminal-line">
+                                                    <span class="terminal-prompt">$</span>
+                                                    <span class="terminal-command">npm install -g gift-calc</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p>Add to <code>mcp.json</code> configuration file:</p>
+                                        <div class="terminal">
+                                            <button class="copy-button" onclick="copyInstructionCode(this)">Copy</button>
+                                            <div class="terminal-content">
+                                                <pre class="config-code">{
+  "servers": {
+    "gift-calc": {
+      "command": "gift-calc-mcp"
+    }
+  }
+}</pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="instruction-panel" id="other-instructions">
+                            <h4>Generic MCP Client Setup</h4>
+                            <div class="setup-steps">
+                                <div class="setup-step">
+                                    <span class="step-number">1</span>
+                                    <div class="step-content">
+                                        <h5>Requirements</h5>
+                                        <p>For any MCP-compatible client that supports STDIO transport:</p>
+                                        <ul>
+                                            <li><strong>Command:</strong> <code>gift-calc-mcp</code></li>
+                                            <li><strong>Transport:</strong> STDIO</li>
+                                            <li><strong>Protocol Version:</strong> 2025-06-18</li>
+                                            <li><strong>Arguments:</strong> None required</li>
+                                        </ul>
+                                        <div class="terminal">
+                                            <button class="copy-button" onclick="copyInstructionCode(this)">Copy</button>
+                                            <div class="terminal-content">
+                                                <div class="terminal-line">
+                                                    <span class="terminal-prompt">$</span>
+                                                    <span class="terminal-command">npm install -g gift-calc</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Available Tools -->
+                <div class="mcp-tools">
+                    <h3>Available Tools</h3>
+                    <div class="tools-grid">
+                        <div class="tool-category">
+                            <h4 class="category-title safe">Safe Tools <span class="safety-badge safe">Read-Only</span></h4>
+                            <div class="tool-list">
+                                <div class="tool-item">
+                                    <span class="tool-icon">🎁</span>
+                                    <div class="tool-info">
+                                        <h5>Calculate Gift Amount</h5>
+                                        <p>Smart calculations with friend & nice scores</p>
+                                    </div>
+                                </div>
+                                <div class="tool-item">
+                                    <span class="tool-icon">🔍</span>
+                                    <div class="tool-info">
+                                        <h5>Match Previous Gift</h5>
+                                        <p>Find and match gift history</p>
+                                    </div>
+                                </div>
+                                <div class="tool-item">
+                                    <span class="tool-icon">📊</span>
+                                    <div class="tool-info">
+                                        <h5>Get Budget Status</h5>
+                                        <p>View spending and remaining budget</p>
+                                    </div>
+                                </div>
+                                <div class="tool-item">
+                                    <span class="tool-icon">⚙️</span>
+                                    <div class="tool-info">
+                                        <h5>Get Configuration</h5>
+                                        <p>View current settings and defaults</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tool-category">
+                            <h4 class="category-title destructive">Management Tools <span class="safety-badge destructive">Requires Confirmation</span></h4>
+                            <div class="tool-list">
+                                <div class="tool-item">
+                                    <span class="tool-icon">🎅</span>
+                                    <div class="tool-info">
+                                        <h5>Naughty List</h5>
+                                        <p>Add/remove people from naughty list</p>
+                                    </div>
+                                </div>
+                                <div class="tool-item">
+                                    <span class="tool-icon">💰</span>
+                                    <div class="tool-info">
+                                        <h5>Set Budget</h5>
+                                        <p>Create spending budgets with dates</p>
+                                    </div>
+                                </div>
+                                <div class="tool-item">
+                                    <span class="tool-icon">🔧</span>
+                                    <div class="tool-info">
+                                        <h5>Initialize Config</h5>
+                                        <p>Set up default values and preferences</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Usage Examples -->
+                <div class="mcp-examples">
+                    <h3>AI Integration Examples</h3>
+                    <div class="examples-container">
+                        <div class="example-conversation">
+                            <div class="conversation-item user">
+                                <span class="speaker">You</span>
+                                <p>"I need to calculate a gift for my coworker Sarah. I usually spend around 75 SEK on coworkers, she's pretty nice."</p>
+                            </div>
+                            <div class="conversation-item ai">
+                                <span class="speaker">AI Assistant</span>
+                                <p>I calculated a gift amount for Sarah: <strong>73.25 SEK</strong>. This is based on your 75 SEK budget for coworkers, with a positive bias since she's nice (nice score 7).</p>
+                            </div>
+                        </div>
+
+                        <div class="example-conversation">
+                            <div class="conversation-item user">
+                                <span class="speaker">You</span>
+                                <p>"Set up a 3000 SEK budget for January birthday gifts."</p>
+                            </div>
+                            <div class="conversation-item ai">
+                                <span class="speaker">AI Assistant</span>
+                                <p>✅ Created budget: <strong>3000 SEK for Birthday gifts</strong> (January 1-31, 2025). I'll track your spending against this budget automatically.</p>
+                            </div>
+                        </div>
+
+                        <div class="example-conversation">
+                            <div class="conversation-item user">
+                                <span class="speaker">You</span>
+                                <p>"Kevin was really rude at the office party. Add him to the naughty list."</p>
+                            </div>
+                            <div class="conversation-item ai">
+                                <span class="speaker">AI Assistant</span>
+                                <p>😈 Kevin has been added to the naughty list. He'll automatically receive 0 (no gift) in future calculations, regardless of other parameters.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <a href="https://github.com/gift-calc/gift-calc/blob/master/MCP.md" class="btn btn-secondary" target="_blank" rel="noopener">
+                            📖 Full MCP Documentation
+                        </a>
                     </div>
                 </div>
             </div>
@@ -1058,8 +2077,101 @@ function gcalc { docker run --rm gift-calc/gift-calc $args }`,
             });
         });
         
+        // MCP Client Switcher Functionality
+        function switchMCPClient(clientType) {
+            // Remove active state from all client buttons
+            document.querySelectorAll('.client-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Add active state to clicked button
+            const activeBtn = document.querySelector(`[data-client="${clientType}"]`);
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+            }
+
+            // Hide all instruction panels
+            document.querySelectorAll('.instruction-panel').forEach(panel => {
+                panel.classList.remove('active');
+            });
+
+            // Show selected instruction panel
+            const targetPanel = document.getElementById(`${clientType}-instructions`);
+            if (targetPanel) {
+                targetPanel.classList.add('active');
+            }
+        }
+
+        function copyInstructionCode(button) {
+            const terminal = button.closest('.terminal');
+            const commands = terminal.querySelectorAll('.terminal-command');
+            const configCode = terminal.querySelector('.config-code');
+            
+            let textToCopy = '';
+            
+            if (configCode) {
+                // Copy config code (JSON)
+                textToCopy = configCode.textContent.trim();
+            } else if (commands.length > 0) {
+                // Copy terminal commands
+                textToCopy = Array.from(commands).map(cmd => cmd.textContent).join('\n');
+            } else {
+                // Fallback: copy all terminal content
+                const terminalContent = terminal.querySelector('.terminal-content');
+                textToCopy = terminalContent.textContent.trim();
+            }
+
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.style.background = 'var(--accent-primary)';
+                button.style.color = 'white';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '';
+                    button.style.color = '';
+                }, 2000);
+            }).catch(() => {
+                // Fallback for older browsers
+                const textarea = document.createElement('textarea');
+                textarea.value = textToCopy;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                }, 2000);
+            });
+        }
+
+        function initializeMCPFunctionality() {
+            // Add click listeners to client buttons
+            document.querySelectorAll('.client-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const clientType = btn.getAttribute('data-client');
+                    switchMCPClient(clientType);
+                });
+            });
+
+            // Ensure Claude Desktop is initially active (it has the 'active' class in HTML)
+            const activeClientBtn = document.querySelector('.client-btn.active');
+            if (activeClientBtn) {
+                const clientType = activeClientBtn.getAttribute('data-client');
+                switchMCPClient(clientType);
+            }
+        }
+
         // Initialize OS detection when page loads
-        document.addEventListener('DOMContentLoaded', initializeOSDetection);
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeOSDetection();
+            initializeMCPFunctionality();
+        });
     </script>
     
     <!-- Interactive Demo Scripts -->
